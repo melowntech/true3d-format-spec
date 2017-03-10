@@ -1,5 +1,9 @@
 # true3d-format-spec
-A specification for reprsenting true 3D data.
+A specification for representing true 3D data.
+
+# License
+
+The text of this specification is licensed under a [Creative Commons Attribution 3.0 United States License](http://creativecommons.org/licenses/by/3.0/us/). However, the use of this specification in products and code is entirely free. There are no royalties, restrictions, or requirements.
 
 ## Directory Layout
 
