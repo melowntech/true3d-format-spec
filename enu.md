@@ -19,9 +19,7 @@ XYZ coordinate system for given ENU SRS definition has the origin at (lon0, lat0
 Geographiclib's [GeographicLib::LocalCartesian](http://geographiclib.sourceforge.net/html/classGeographicLib_1_1LocalCartesian.html) class can be used for convesion between latlon and enu coordinates (in both directions): `lat0`, `lon0`, `h0` map to constructor parameters and `a` and `b` can be used to construct [GeographicLib::GeoCentric](http://geographiclib.sourceforge.net/html/classGeographicLib_1_1Geocentric.html) instance (`f = (a - b) / a`), use `GeographicLib::Geocentric::WGS84` for default spheroid.
 
 When converting coordinates between ENU SRS and another SRS one must convert coordinates between ENU SRS and intermediate latlon SRS and then between intermediate latlon SRS and destination SRS. Nota bene that intermediate latlon SRS is defined as:
-
 ```
 +proj=lonlat +a=A +b=B +towgs84=TOGWS84
 ```
-
-where spheroid definition (+a, +b) and towg84 transformation are optional (based on ENU SRS).
+where spheroid definition (+a, +b) and towgs84 transformation are optional (based on ENU SRS).
