@@ -36,7 +36,7 @@ A manifest file contains all export metadata at one place. Manifest is written a
 
 All paths in manifest are relative to path of enclosing entity: `window` path is relative to `manifest.json` path, `lod` path is relative to the `window` it belongs etc, atlas textures and mesh paths are relative to their `lod`.
 
-## Transformation matrix
+### Transformation matrix
 
 Transformation (3x4 row major) matrices are represented as 12-element array, i.e. matrix:
 ```
@@ -52,6 +52,17 @@ is stored as
 ```javascript
 [ A, B, C, D, E, F, H, I, J, K, L ]
 ```
+
+### SRS
+
+A spatial reference system can be written in one of the following formats:
+
+ * +proj format string
+ * WKT string
+ * EPSG code in format EPSG:number
+ * custom ENU (east, north, up) format for local cartesian system at given place on the earth surface
+ 
+See [ENU format specification](enu.md) for more information.
 
 ### Manifest example:
 ```javascript
