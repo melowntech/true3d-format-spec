@@ -32,7 +32,7 @@ Directory structure inside format is not mandated since all paths are recorded i
 
 All 3D meshes share same origin (i.e. point 0, 0, 0). Meshes are georeferenced by using spatial reference system.
 
-Since coordinates in most SRS are huge numbers vertices can be transformed to much smaller number by applying a transformation. For example, vertices can be localized around common center. Inverse transformation matrix for data can be stored at the manifest level (applies to all meshes) or at window level (applies to all meshes in given window).
+Since coordinates in most SRS are huge numbers vertices can be transformed to much smaller number by applying a transformation. For example, vertices can be localized around common center. Inverse transformation matrix **A** for data can be stored at the manifest level (applies to all meshes) or at window level (applies to all meshes in given window). If **A** is defined, every point *x* of given mesh is first expressed in homogenous coordinates and then transformed as **A** *x* before further processing.
 
 ## Manifest
 
@@ -44,17 +44,13 @@ All paths in manifest are relative to path of enclosing entity: `window` path is
 
 Transformation (3x4 row major) matrices are represented as 12-element array, i.e. matrix:
 ```
-+-+-+-+-+
-|A|B|C|D|
-+-+-+-+-+
-|E|F|G|H|
-+-+-+-+-+
-|I|J|K|L|
-+-+-+-+-+
+    / a b c d \
+A = | e f g h |
+    \ i j k l /
 ```
 is stored as
 ```javascript
-[ A, B, C, D, E, F, H, I, J, K, L ]
+[ a, b, c, d, e, f, g, h, i, j, k, l ]
 ```
 
 ### SRS
