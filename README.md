@@ -59,7 +59,8 @@ A spatial reference system can be written in one of the following formats:
 
  * +proj format string
  * WKT string
- * EPSG code in format EPSG:number
+ * EPSG code in format EPSG:number, e.e. EPSG:3857 for pseudomercator
+ * combined EPSG horizontal and vertical system codes in format EPSG:number+number, e.g. EPSG:3857+5773 for pseudomercator combined with EGM96-based vertical system
  * custom ENU (east, north, up) format for local cartesian system at given place on the earth surface
  
 See [ENU format specification](enu.md) for more information.
