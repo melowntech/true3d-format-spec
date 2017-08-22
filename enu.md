@@ -6,12 +6,12 @@ ENU SRS string is defined as follows:
 
  * starts with `enu`
  * contains a reference spheroid (defaults to WGS84), either none or both `a` and `b` must be used:
-  * `a=A` semimajor axis of the reference spheroid
-  * `b=B` semiminor axis of the reference spheroid
+     * `a=A` semimajor axis of the reference spheroid
+     * `b=B` semiminor axis of the reference spheroid
  * contains an origin specification
-  * `lon0=x` specifies longitude of origin on the reference sheroid (`lon0` defaults to 0)
-  * `lat0=y` specifies latitude of origin on the reference sheroid (`lat0` defaults to 0)
-  * `h0=z` specifies height of origin above the reference sheroid (`h0` defaults to 0)
+     * `lon0=x` specifies longitude of origin on the reference sheroid (`lon0` defaults to 0)
+     * `lat0=y` specifies latitude of origin on the reference sheroid (`lat0` defaults to 0)
+     * `h0=z` specifies height of origin above the reference sheroid (`h0` defaults to 0)
  * contains optional `towgs84=TOWGS84` definition, see Proj.4 documentation for details (comma-separated list of either 3 or 7 real numbers)
 
 XYZ coordinate system for given ENU SRS definition has the origin at (lon0, lat0, h0) point on the reference spheroid. XY plane is tangent to the spheroid at (lon0, lat0) coordinates and Z-axis is perpendicular to this plane.
