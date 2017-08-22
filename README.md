@@ -73,7 +73,7 @@ See [ENU format specification](enu.md) for more information.
 
     // spatial reference system used to transfrom from XYZ coordinates to geo space
     // missing if this is purely local XYZ
-    // available formats: Proj.4 format, WKT string, EPSG:code or ENU
+    // available formats: Proj.4 format, WKT string, EPSG:code, EPSG:code+code or ENU
     // ENU format is described in separate document
     , "srs": "+proj=utm +zone=33 +datum=WGS84 +no_defs"
     
