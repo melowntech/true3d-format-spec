@@ -26,6 +26,8 @@ root/manifest.json
 
 The root directory contains a `manifest.json` file with export metadata (described later in this document). 3D data are divided into ''windows'' -- generalized 3D tiles. Each window is made of multiple version of the same data: original and derived levels of detail (LODs). The ratio of average texel size (mesh area in meters divided by texture area in pixels) between LOD and LOD+1 is expected to be 2. Physical data are textured 3D meshes stored as a .OBJ file (optinally gzipped) with atlas: list of textures and helper MTL file for simple meshlab display.
 
+Texture assignment to faces is done via `usemtl IDX` lines in OBJ files where IDX is numeric index of texture in the atlas, i.e. faces from first texture follow `usemtl 0` line, faces from second texture follow `usemtl 1` line etc.
+
 Optionally, whole directory structure can be archived in a tar archive. Format reader should be able to locate data by finding `manifest.json` file inside the archive. Archive should not be compressed to allow dirrect file access.
 
 Directory structure inside format is not mandated since all paths are recorded inside the manifest.
