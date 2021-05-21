@@ -24,7 +24,7 @@ root/manifest.json
            ...
 ```
 
-The root directory contains a `manifest.json` file with export metadata (described later in this document). 3D data are divided into ''windows'' -- generalized 3D tiles. Each window is made of multiple version of the same data: original and derived levels of detail (LODs). The ratio of average texel size (mesh area in meters divided by texture area in pixels) between LOD and LOD+1 is expected to be 2. Physical data are textured 3D meshes stored as a .OBJ file (optinally gzipped) with atlas: list of textures and helper MTL file for simple meshlab display.
+The root directory contains a `manifest.json` file with export metadata (described later in this document). 3D data are divided into ''windows'' -- generalized 3D tiles. Each window is made of multiple version of the same data: original and derived levels of detail (LODs). The ratio of average texel size (mesh area in meters divided by texture area in pixels) between LOD and LOD+1 is expected to be 2. Highest number (LOD) corresponds to the finest mesh. Physical data are textured 3D meshes stored as a .OBJ file (optinally gzipped) with atlas: list of textures and helper MTL file for simple meshlab display.
 
 Texture assignment to faces is done via `usemtl IDX` lines in OBJ files where IDX is numeric index of texture in the atlas, i.e. faces from first texture follow `usemtl 0` line, faces from second texture follow `usemtl 1` line etc.
 
