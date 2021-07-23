@@ -1,5 +1,5 @@
-# true3d-format-spec
-A specification for representing true 3D data.
+# VEF format specification
+A specification for representing hierarchical true 3D data.
 
 # License
 
