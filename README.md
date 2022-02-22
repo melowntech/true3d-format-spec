@@ -91,11 +91,12 @@ See [ENU format specification](enu.md) for more information.
             // path to window content (relative to this file)
             "path": "window0"
  
-            // optional transformation to be applied to all meshes in this window
+            // optional transformation to be applied to all meshes (including extents) in this window
             , "trafo": [ 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 ]
             
-            // optional 3D extents (axia-aligned bounding box) of window mesh; used for optimization purposes
-            // for example bbox with extremes at [0, 0, 0] and [100, 100, 100]:
+            // optional 3D extents (axia-aligned bounding box) of window mesh, in local coordinate system;
+            // used for optimization purposes
+            // example: bbox with extremes at [0, 0, 0] and [100, 100, 100]:
             , "extents": [ 0, 0, 0, 100, 100, 100 ]
  
             // levels of detail, sorted from most detailed verion (original) to the coarsest one
