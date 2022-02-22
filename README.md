@@ -55,6 +55,10 @@ is stored as
 [ a, b, c, d, e, f, g, h, i, j, k, l ]
 ```
 
+### 3D Extents
+
+3D mesh extents (axis-aligned bounding box) written in the format `[ min.x, mib.y, min,z, max.x, max.y, max.z ]`.
+
 ### SRS
 
 A spatial reference system can be written in one of the following formats:
@@ -89,6 +93,9 @@ See [ENU format specification](enu.md) for more information.
  
             // optional transformation to be applied to all meshes in this window
             , "trafo": [ 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 ]
+            
+            // optional 3D extents (axia-aligned bounding box) of window mesh, for example bbox with extremes at [0, 0, 0] and [100, 100, 100]:
+            , "extents": [ 0, 0, 0, 100, 100, 100 ]
  
             // levels of detail, sorted from most detailed verion (original) to the coarsest one
             , "lods": [
