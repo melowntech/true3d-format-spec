@@ -26,9 +26,11 @@ root/manifest.json
 
 The root directory contains a `manifest.json` file with export metadata (described later in this document). 3D data are divided into ''windows'' -- generalized 3D tiles. Each window is made of multiple version of the same data: original and derived levels of detail (LODs). The ratio of average texel size (mesh area in meters divided by texture area in pixels) between LOD and LOD+1 is expected to be 2. Highest number (LOD) corresponds to the finest mesh. Physical data are textured 3D meshes stored as a .OBJ file (optinally gzipped) with atlas: list of textures and helper MTL file for simple meshlab display.
 
-Texture assignment to faces is done via `usemtl IDX` lines in OBJ files where IDX is numeric index of texture in the atlas, i.e. faces from first texture follow `usemtl 0` line, faces from second texture follow `usemtl 1` line etc.
+Texture assignment to faces is done via `usemtl IDX` lines in OBJ files where IDX is numeric index of a texture in the atlas, i.e. faces from first texture follow `usemtl 0` line, faces from second texture follow `usemtl 1` line etc.
 
-Optionally, whole directory structure can be archived in a tar archive. Format reader should be able to locate data by finding `manifest.json` file inside the archive. Archive should not be compressed to allow dirrect file access.
+If part of the mesh is untextured then the atlas entry may be either empty or contain a RGB color reference. Provided color can be used as a material where appropripate. If atlas is smaller than number of submeshes in the actual mesh the implementation should treat material references outside of the valid atlas as faces belonging to an untextured sub-meshes.
+
+Optionally, whole directory structure can be archived in a TAR or a ZIP archive. Format reader should be able to locate data by finding `manifest.json` file inside the archive. TAR should not be compressed to allow dirrect file access. ZIP might use compression since ZIP uses per-file compression.
 
 Directory structure inside format is not mandated since all paths are recorded inside the manifest.
 
@@ -85,7 +87,11 @@ See [ENU format specification](enu.md) for more information.
     
     // optional transformation to be applied to all meshes
     , "trafo": [ 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 ]
- 
+
+    // optional Ground Sampling Distanc [in meters] of finest detail mesh
+    // may be overridden at window level
+    , "gsd": 0.05 // 5 cm
+    
     , "windows": [
         {
             // path to window content (relative to this file)
@@ -105,15 +111,31 @@ See [ENU format specification](enu.md) for more information.
                     // path to LOD data (relative to window path)
                     "path": "0"
 
-                    // atlas: a list of textures referenced by mesh
+                    // optional Ground Sampling Distanc [in meters] of finest detail mesh
+                    // overrides top-level GSD
+                    // if there's no GSD available for window, implementation must calculate GSD from mesh and atlas data
+                    "gsd": 0.04 // 4.5 cm, overrides 5 cm archive-wide default
+
+                    // atlas: A list of textures referenced by mesh
                     , "atlas": [
                         {
+                            // textured sub-mesh
+
                             // path to texture file, relative to window/lod path
                             "path": "texture0.jpg"
                             // texture size in pixels
                             , "size": [ 1024, 512 ]
                             // texture format (one of jpg, png, jpeg2000)
                             , "format": "jpg"
+                        }
+                        , }
+                            // untextured sub-mesh, GSD is mandatory
+                            // material properties unspecified
+                        }
+                        , }
+                            // untextured sub-mesh, GSD is mandatory
+                            // material color
+                            "color": [ 255, 255, 0 ] // yellow color
                         }
                         , ...
                     ]
