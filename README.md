@@ -28,9 +28,9 @@ The root directory contains a `manifest.json` file with export metadata (describ
 
 Texture assignment to faces is done via `usemtl IDX` lines in OBJ files where IDX is numeric index of a texture in the atlas, i.e. faces from first texture follow `usemtl 0` line, faces from second texture follow `usemtl 1` line etc.
 
-If part of the mesh is untextured then the atlas entry may be either empty or contain a RGB color reference. Provided color can be used as a material where appropripate. If atlas is smaller than number of submeshes in the actual mesh the implementation should treat material references outside of the valid atlas as faces belonging to an untextured sub-meshes.
+If part of the mesh is untextured then the atlas entry may be either empty or contain a RGB color reference. Provided color can be used as a material where appropriate. If atlas is smaller than number of submeshes in the actual mesh the implementation should treat material references outside of the valid atlas as faces belonging to an untextured sub-meshes.
 
-Optionally, whole directory structure can be archived in a TAR or a ZIP archive. Format reader should be able to locate data by finding `manifest.json` file inside the archive. TAR should not be compressed to allow dirrect file access. ZIP might use compression since ZIP uses per-file compression.
+Optionally, whole directory structure can be archived in a TAR or a ZIP archive. Format reader should be able to locate data by finding `manifest.json` file inside the archive. TAR should not be compressed to allow direct file access. ZIP might use compression since ZIP uses per-file compression.
 
 Directory structure inside format is not mandated since all paths are recorded inside the manifest.
 
@@ -88,10 +88,10 @@ See [ENU format specification](enu.md) for more information.
     // optional transformation to be applied to all meshes
     , "trafo": [ 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 ]
 
-    // optional Ground Sampling Distanc [in meters] of finest detail mesh
+    // optional Ground Sampling Distance [in meters] of finest detail mesh
     // may be overridden at window level
     , "gsd": 0.05 // 5 cm
-    
+
     , "windows": [
         {
             // path to window content (relative to this file)
@@ -111,7 +111,7 @@ See [ENU format specification](enu.md) for more information.
                     // path to LOD data (relative to window path)
                     "path": "0"
 
-                    // optional Ground Sampling Distanc [in meters] of finest detail mesh
+                    // optional Ground Sampling Distance [in meters] of finest detail mesh
                     // overrides top-level GSD
                     // if there's no GSD available for window, implementation must calculate GSD from mesh and atlas data
                     "gsd": 0.04 // 4.5 cm, overrides 5 cm archive-wide default
@@ -128,11 +128,11 @@ See [ENU format specification](enu.md) for more information.
                             // texture format (one of jpg, png, jpeg2000)
                             , "format": "jpg"
                         }
-                        , }
+                        , {
                             // untextured sub-mesh, GSD is mandatory
                             // material properties unspecified
                         }
-                        , }
+                        , {
                             // untextured sub-mesh, GSD is mandatory
                             // material color
                             "color": [ 255, 255, 0 ] // yellow color
