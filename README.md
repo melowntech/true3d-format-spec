@@ -128,11 +128,11 @@ See [ENU format specification](enu.md) for more information.
                             // texture format (one of jpg, png, jpeg2000)
                             , "format": "jpg"
                         }
-                        , }
+                        , {
                             // untextured sub-mesh, GSD is mandatory
                             // material properties unspecified
                         }
-                        , }
+                        , {
                             // untextured sub-mesh, GSD is mandatory
                             // material color
                             "color": [ 255, 255, 0 ] // yellow color
