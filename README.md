@@ -73,6 +73,12 @@ A spatial reference system can be written in one of the following formats:
  
 See [ENU format specification](enu.md) for more information.
 
+### Mesh area
+
+Mesh area describes mesh area in 3D spaces in square world units (e.g. square meters) and texture spaces in square pixels. Square root of their ratio produces an average resolution (GSD) at the finest LOD. 
+
+If the window's LOD structure starts at coarser LOD the value must be computed from first available LOD and adjusted for LOD difference. I.e. if resolution halves at each LOD the texture area has to be scaled 4x for each LOD from LOD0.
+
 ### Manifest example:
 ```javascript
 {
@@ -88,10 +94,6 @@ See [ENU format specification](enu.md) for more information.
     // optional transformation to be applied to all meshes
     , "trafo": [ 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 ]
 
-    // optional Ground Sampling Distance [in meters] of finest detail mesh
-    // may be overridden at window level
-    , "gsd": 0.05 // 5 cm
-
     , "windows": [
         {
             // path to window content (relative to this file)
@@ -100,10 +102,17 @@ See [ENU format specification](enu.md) for more information.
             // optional transformation to be applied to all meshes in this window
             , "trafo": [ 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 ]
             
-            // optional 3D extents (axia-aligned bounding box) of window mesh, in global coordinate system;
+            // optional 3D extents (axis-aligned bounding box) of window mesh, in global coordinate system;
             // used for optimization purposes
             // example: bbox with extremes at [0, 0, 0] and [100, 100, 100]:
             , "extents": [ 0, 0, 0, 100, 100, 100 ]
+
+            // optional area of 3D mesh in wold coordinates (in square units) and texture mesh in square pixels
+            // mesh area is used to calculate resolution at various occasions, like generating tile trees
+            , "meshArea": {
+                "mesh": 2779.3727590783033
+                , "texture": 767573.31995439634
+            }
  
             // levels of detail, sorted from most detailed verion (original) to the coarsest one
             , "lods": [
@@ -111,12 +120,7 @@ See [ENU format specification](enu.md) for more information.
                     // path to LOD data (relative to window path)
                     "path": "0"
 
-                    // optional Ground Sampling Distance [in meters] of finest detail mesh
-                    // overrides top-level GSD
-                    // if there's no GSD available for window, implementation must calculate GSD from mesh and atlas data
-                    "gsd": 0.04 // 4.5 cm, overrides 5 cm archive-wide default
-
-                    // atlas: A list of textures referenced by mesh
+                     // atlas: A list of textures referenced by mesh
                     , "atlas": [
                         {
                             // textured sub-mesh
@@ -129,11 +133,11 @@ See [ENU format specification](enu.md) for more information.
                             , "format": "jpg"
                         }
                         , {
-                            // untextured sub-mesh, GSD is mandatory
+                            // untextured sub-mesh, meshArea is mandatory
                             // material properties unspecified
                         }
                         , {
-                            // untextured sub-mesh, GSD is mandatory
+                            // untextured sub-mesh, meshArea is mandatory
                             // material color
                             "color": [ 255, 255, 0 ] // yellow color
                         }
